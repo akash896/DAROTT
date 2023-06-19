@@ -1,0 +1,27 @@
+.fullSize {
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+}
+
+.login-layout {
+    position: relative;
+    height: 100vh;
+}
+
+.login-content {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    padding: 24px;
+    background: #fff;
+    /* height: 100pt; */
+    width: 300pt;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}

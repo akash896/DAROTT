@@ -1,0 +1,253 @@
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzFor]="'movieTitle'" [nzSpan]="24">Movie Title</nz-form-label>
+                <nz-form-control>
+                    <input nz-input placeholder="Movie Title" [formControlName]="'movieTitle'"
+                        [attr.id]="'movieTitle'" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzFor]="'genreUid'" [nzSpan]="24">Genre</nz-form-label>
+                <nz-form-control>
+                    <nz-select [formControlName]="'genreUid'" [attr.id]="'genreUid'" nzPlaceHolder="Select Genre"
+                        nzAllowClear nzShowSearch nzServerSearch (nzOnSearch)="onSearchSelect($event, genreSelect)">
+                        <ng-container *ngFor="let o of genreSelect.optionList">
+                            <nz-option *ngIf="!genreSelect.isLoading" [nzValue]="o.value"
+                                [nzLabel]="o.label"></nz-option>
+                        </ng-container>
+                        <nz-option *ngIf="genreSelect.isLoading" nzDisabled nzCustomContent>
+                            <span nz-icon nzType="loading" class="loading-icon"></span>
+                            Loading Data...
+                        </nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzFor]="'maturityRating'" [nzSpan]="24">Maturity Rating</nz-form-label>
+                <nz-form-control>
+                    <input nz-input placeholder="Maturity Rating" [formControlName]="'maturityRating'"
+                        [attr.id]="'maturityRating'" />
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzFor]="'releaseYear'" [nzSpan]="24">Release Year</nz-form-label>
+                <nz-form-control>
+                    <nz-date-picker style="width: 100%" nzMode="year" [formControlName]="'releaseYear'"
+                        [attr.id]="'releaseYear'"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzFor]="'duration'" [nzSpan]="24">Duration</nz-form-label>
+                <nz-form-control>
+                    <nz-time-picker style="width: 100%" [formControlName]="'duration'"
+                        [attr.id]="'duration'"></nz-time-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzFor]="'introStart'" [nzSpan]="24">Intro Start</nz-form-label>
+                <nz-form-control>
+                    <nz-time-picker style="width: 100%" [formControlName]="'introStart'"
+                        [attr.id]="'introStart'"></nz-time-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-label [nzFor]="'introEnd'" [nzSpan]="24">Intro End</nz-form-label>
+                <nz-form-control>
+                    <nz-time-picker style="width: 100%" [formControlName]="'introEnd'"
+                        [attr.id]="'introEnd'"></nz-time-picker>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="24">
+            <nz-form-item>
+                <nz-form-label [nzFor]="'description'" [nzSpan]="24">Description</nz-form-label>
+                <nz-form-control>
+                    <textarea nz-input rows="4" [formControlName]="'description'" [attr.id]="'description'"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="24">
+            <ng-container [formArrayName]="'crews'">
+                <nz-table #crewTable nzSize="small" [nzData]="crews.controls">
+                    <thead>
+                        <tr>
+                            <th nzWidth="20%">Category</th>
+                            <th>Casting Name</th>
+                            <th>Character Name</th>
+                            <th>Action <button (click)="addCrew(-1)" style="float: right;" nz-button nzType="text"
+                                    nzShape="circle"><span nz-icon nzType="plus"></span></button></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let crewForm of crewTable.data; let i = index" [formGroup]="crewForm">
+                            <td>
+                                <nz-form-control>
+                                    <nz-select [formControlName]="'categoryUid'" [attr.id]="'categoryUid'"
+                                        nzPlaceHolder="Category" nzAllowClear nzShowSearch nzServerSearch
+                                        (nzOnSearch)="onSearchSelect($event, categorySelect)" [nzBorderless]="true">
+                                        <ng-container *ngFor="let o of categorySelect.optionList">
+                                            <nz-option *ngIf="!categorySelect.isLoading" [nzValue]="o.value"
+                                                [nzLabel]="o.label"></nz-option>
+                                        </ng-container>
+                                        <nz-option *ngIf="categorySelect.isLoading" nzDisabled nzCustomContent>
+                                            <span nz-icon nzType="loading" class="loading-icon"></span>
+                                            Loading Data...
+                                        </nz-option>
+                                    </nz-select>
+                                </nz-form-control>
+                            </td>
+                            <td>
+                                <nz-form-control>
+                                    <input nz-input placeholder="Casting Name" [formControlName]="'castingName'"
+                                        [attr.id]="'castingName'" [nzBorderless]="true" />
+                                </nz-form-control>
+                            </td>
+                            <td>
+                                <nz-form-control>
+                                    <input nz-input placeholder="Character Name" [formControlName]="'characterName'"
+                                        [attr.id]="'characterName'" [nzBorderless]="true" />
+                                </nz-form-control>
+                            </td>
+                            <td>
+                                <button nz-button nzType="text" nzShape="circle" (click)="addCrew(i, 1)"><span nz-icon
+                                        nzType="delete"></span></button>
+                                <button nz-button nzType="text" nzShape="circle" (click)="addCrew(i + 1)"><span nz-icon
+                                        nzType="plus"></span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+                <!-- <ng-container *ngFor="let crewForm of crews.controls; let i = index">
+                    <form nz-form class="lesson-form-row" [formGroup]="crewForm">
+                        <div nz-row [nzGutter]="24">
+                            <div nz-col [nzSpan]="8">
+                                <nz-form-item>
+                                    <nz-form-label [nzFor]="'title'" [nzSpan]="24">Movie Title</nz-form-label>
+                                    <nz-form-control>
+                                        <input nz-input placeholder="Movie Title" [formControlName]="'title'"
+                                            [attr.id]="'title'" />
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                            <div nz-col [nzSpan]="8">
+                                <nz-form-item>
+                                    <nz-form-label [nzFor]="'level'" [nzSpan]="24">Movie Title</nz-form-label>
+                                    <nz-form-control>
+                                        <input nz-input placeholder="Movie Title" [formControlName]="'level'"
+                                            [attr.id]="'level'" />
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                            <div nz-col [nzSpan]="8">
+                                <button nz-button nzType="primary" nzShape="circle">A</button>
+                            </div>
+                        </div>
+                    </form>
+                </ng-container> -->
+            </ng-container>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="24">
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-control>
+                    <nz-upload [nzAction]="serverPath + 'file/File'" nzListType="picture"
+                        [(nzFileList)]="fileListPoster">
+                        <button nz-button>
+                            <span nz-icon nzType="upload"></span>Upload Poster</button>
+                    </nz-upload>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-control>
+                    <nz-upload [nzAction]="serverPath + 'file/File'" nzListType="picture"
+                        [(nzFileList)]="fileListPreview">
+                        <button nz-button>
+                            <span nz-icon nzType="upload"></span>Upload Preview</button>
+                    </nz-upload>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div nz-col [nzSpan]="8">
+            <nz-form-item>
+                <nz-form-control>
+                    <nz-upload [nzAction]="serverPath + 'file/File'" nzListType="picture" [(nzFileList)]="fileListMovie"
+                        [nzLimit]="1" [nzShowButton]="fileListMovie.length < 1">
+                        <button nz-button>
+                            <span nz-icon nzType="upload"></span>Upload Movie</button>
+                    </nz-upload>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+</form>
+<!-- <nz-table
+    nzShowSizeChanger
+    [nzData]="testList"
+    [nzFrontPagination]="true"
+    [nzLoading]="loading"
+    [nzTotal]="testList.length"
+    [nzPageSize]="10"
+    [nzPageIndex]="1">
+    <thead>
+        <tr>
+            <th nzWidth="20%">Category</th>
+            <th>Casting Name</th>
+            <th>Character Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let crewForm of testList">
+            <td>
+                {{ crewForm.name }}
+            </td>
+            <td>
+                {{ crewForm.roll }}
+            </td>
+            <td>
+                {{ crewForm.address }}
+            </td>
+            <td>
+                <a>Action 一 {{ data.name }}</a>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a>Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table> -->
+<button nz-button nzType="primary" nzShape="circle" (click)="getJSONData()">
+    get
+</button>
+<button nz-button nzType="primary" nzShape="circle" (click)="setJSONData()">
+    set
+</button>
+<button nz-button nzType="primary" nzShape="circle" (click)="addCrew(-1)">
+    +
+</button><button nz-button nzType="primary" nzShape="circle" (click)="addCookie()">
+    +
+</button>

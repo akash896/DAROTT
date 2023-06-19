@@ -1,0 +1,13 @@
+<div class="fullSize">
+    <nz-layout class="login-layout">
+        <nz-content class="login-content">
+            <input nz-input placeholder="User Id" [(ngModel)]="username" autocomplete="username" />
+            <br>
+            <br>
+            <input nz-input placeholder="Password" type="password" [(ngModel)]="password" autocomplete="current-password" />
+            <br>
+            <br>
+            <button nz-button nzType="primary" (click)="login()" nzSize="large"><span nz-icon nzType="login"></span>Login</button>
+        </nz-content>
+    </nz-layout>
+</div>

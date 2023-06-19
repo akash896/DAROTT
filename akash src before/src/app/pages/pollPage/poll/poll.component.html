@@ -1,0 +1,86 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'pollTitle'" [nzSpan]="24">Poll Title</nz-form-label>
+        <nz-form-control nzErrorTip="Poll Title">
+          <input formControlName="pollTitle" nz-input placeholder="pollTitle" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'amountForPoll'" [nzSpan]="24">Amount For Poll</nz-form-label>
+        <nz-form-control nzErrorTip="Amount For Poll">
+          <input formControlName="amountForPoll" nz-input placeholder="amountForPoll" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'pollTypeOfOptions'" [nzSpan]="24">Type of Options</nz-form-label>
+        <nz-form-control nzErrorTip="Please Select Value!">
+          <nz-select
+            formControlName="pollTypeOfOptions"
+            nzAllowClear
+            nzPlaceHolder="pollTypeOfOptions"
+            [nzOptions]="pollTypeOfOptions"
+          ></nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col  [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-form-label [nzFor]="'uploadImage'" [nzSpan]="24"> </nz-form-label>
+
+          <div class="clearfix" >
+            <nz-upload
+              nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              nzListType="picture"
+              [(nzFileList)]="fileList1" formControlName="uploadImage"
+            >
+              <button nz-button>
+                <i nz-icon nzType="upload"></i>
+                Upload
+              </button>
+            </nz-upload>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'pollPhotoTitle'" [nzSpan]="24">Photo Title</nz-form-label>
+        <nz-form-control nzErrorTip="Photo Title">
+          <input formControlName="pollPhotoTitle" nz-input  placeholder="pollPhotoTitle" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col  [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'description'" [nzSpan]="24">Description</nz-form-label>
+        <nz-form-control nzErrorTip="Please Enter a description!">
+          <nz-input-group >
+            <textarea nz-input rows="4" formControlName="description"></textarea>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-col>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-form-label  [nzSpan]="24"> </nz-form-label>
+        <button nz-button style="display: block;" nzType="primary"
+        [disabled]="!validateForm.valid">Save & Continue</button>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</form>
+

@@ -1,0 +1,98 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <div nz-row [nzGutter]="24">
+    <!-- <div nz-col>
+      <nz-form-item>
+        <nz-form-label [nzFor]="'userName'" [nzSpan]="24">Username</nz-form-label>
+        <nz-form-control nzErrorTip="Please input your username!">
+          <nz-input-group nzPrefixIcon="user">
+            <input formControlName="userName" nz-input placeholder="Username" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col>
+      <nz-form-item>
+        <nz-form-label [nzFor]="'password'" [nzSpan]="24">Password</nz-form-label>
+        <nz-form-control nzErrorTip="Please input your Password!">
+          <nz-input-group nzPrefixIcon="lock">
+            <input formControlName="password" nz-input type="password" placeholder="Password" />
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div> -->
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'eventTypeList'" [nzSpan]="24">EventType</nz-form-label>
+        <nz-form-control nzErrorTip="Please Select Value!">
+          <nz-select
+            formControlName="eventTypeList"
+            nzAllowClear
+            nzPlaceHolder="Event"
+            [nzOptions]="eventTypeList"
+          ></nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'eventTitle'" [nzSpan]="24">Event Title</nz-form-label>
+        <nz-form-control nzErrorTip="Voting Title">
+          <input formControlName="eventTitle" nz-input placeholder="eventTitle" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'onDate'" [nzSpan]="24">Choose an Date</nz-form-label>
+        <nz-form-control nzErrorTip="Please Select Date!">
+
+          <nz-date-picker style="width: 100%;" formControlName="onDate" [nzFormat]="'yyyy/MM/dd'"></nz-date-picker >
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col  [nzSpan]="8">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-form-label [nzFor]="'uploadImage'" [nzSpan]="24"> </nz-form-label>
+
+          <div class="clearfix" >
+            <nz-upload
+              nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              nzListType="picture"
+              [(nzFileList)]="fileList1" formControlName="uploadImage"
+            >
+              <button nz-button>
+                <i nz-icon nzType="upload"></i>
+                Upload
+              </button>
+            </nz-upload>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-row [nzGutter]="24">
+    <div nz-col  [nzSpan]="24">
+      <nz-form-item>
+        <nz-form-label [nzFor]="'description'" [nzSpan]="24">Description</nz-form-label>
+        <nz-form-control nzErrorTip="Please Enter a description!">
+          <nz-input-group >
+            <textarea nz-input rows="4" formControlName="description"  placeholder="horoscopeDescription" ></textarea>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div nz-col>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-form-label  [nzSpan]="24"> </nz-form-label>
+        <button nz-button style="display: block;" nzType="primary"
+        [disabled]="!validateForm.valid">Save & Continue</button>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</form>
+
